@@ -1,0 +1,39 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+        
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Build
+        run: |
+          npm run build
+
+      - name: Install ossutils
+        run: |
+          wget -q https://gosspublic.alicdn.com/ossutil/1.7.19/ossutil-v1.7.19-linux-amd64.zip
+          unzip ossutil-v1.7.19-linux-amd64.zip
+          chmod +x ossutil
+          sudo mv ossutil /usr/local/bin/
+          rm -rf ossutil-v1.7.19-linux-amd64.zip
+          export PATH=$PATH:/usr/local/bin
+
+      - name: Upload dist to OSS and Deploy
+        run: |
+          ossutil cp -r dist/ oss://${{ secrets.OSS_BUCKET }}/${{ secrets.OSS_PREFIX }}
