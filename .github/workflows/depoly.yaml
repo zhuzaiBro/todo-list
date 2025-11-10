@@ -29,8 +29,8 @@ jobs:
         run: |
           wget -q https://gosspublic.alicdn.com/ossutil/1.7.19/ossutil-v1.7.19-linux-amd64.zip
           unzip ossutil-v1.7.19-linux-amd64.zip
-          chmod +x ossutil
-          sudo mv ossutil /usr/local/bin/
+          chmod +x ossutil-v1.7.19-linux-amd64/ossutil
+          sudo mv ossutil-v1.7.19-linux-amd64/ossutil /usr/local/bin/
           rm -rf ossutil-v1.7.19-linux-amd64.zip
           export PATH=$PATH:/usr/local/bin
 
