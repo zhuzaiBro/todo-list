@@ -1,39 +1,13 @@
-name: Deploy
+name: Depoly
 
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - staging
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20'
-        
-      - name: Install dependencies
-        run: |
-          npm install
-
-      - name: Build
-        run: |
-          npm run build
-          
-      - name: Deploy to Server via SCP
-        run: |
-          # 设置 SSH 密钥
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          
-          # 添加服务器到 known_hosts 避免首次连接提示
-          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
-          
-          # 使用 scp 上传 dist 目录到远程服务器
-          scp -r dist/* ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/www/wwwroot/todo.remotecodecamp.top/
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
