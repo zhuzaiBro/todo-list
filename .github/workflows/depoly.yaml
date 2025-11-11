@@ -37,16 +37,3 @@ jobs:
           
           # 使用 scp 上传 dist 目录到远程服务器
           scp -r dist/* ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/www/wwwroot/todo.remotecodecamp.top/
-
-      # - name: Install ossutils
-      #   run: |
-      #     wget -q https://gosspublic.alicdn.com/ossutil/1.7.19/ossutil-v1.7.19-linux-amd64.zip
-      #     unzip ossutil-v1.7.19-linux-amd64.zip
-      #     chmod +x ossutil-v1.7.19-linux-amd64/ossutil
-      #     sudo mv ossutil-v1.7.19-linux-amd64/ossutil /usr/local/bin/
-      #     rm -rf ossutil-v1.7.19-linux-amd64.zip
-      #     export PATH=$PATH:/usr/local/bin
-
-      # - name: Upload dist to OSS and Deploy
-      #   run: |
-      #     ossutil cp -r dist/ oss://${{ secrets.OSS_BUCKET }}/${{ secrets.OSS_PREFIX }}
