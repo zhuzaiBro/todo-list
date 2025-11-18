@@ -43,4 +43,4 @@ jobs:
                     docker pull ${{ secrets.DOCKER_USERNAME }}/todomvc-composition-api:latest
                     docker stop todomvc-composition-api
                     docker rm todomvc-composition-api
-                    docker run -d --name todomvc-composition-api -p 80:80 ${{ secrets.DOCKER_USERNAME }}/todomvc-composition-api:latest
+                    docker run -d --name todomvc-composition-api -p 19980:80 ${{ secrets.DOCKER_USERNAME }}/todomvc-composition-api:latest
