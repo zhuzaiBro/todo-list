@@ -1,7 +1,7 @@
 <template>
   <section class="todoapp">
     <header class="header">
-      <h1>todos</h1>
+      <h1>zood's todos</h1>
       <input
         class="new-todo"
         autofocus
